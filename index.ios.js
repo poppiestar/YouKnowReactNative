@@ -15,5 +15,4 @@ class YouKnowReactNative extends Component {
         );
     }
 }
-
 AppRegistry.registerComponent('YouKnowReactNative', () => YouKnowReactNative);

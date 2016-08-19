@@ -10,11 +10,19 @@ export default class YouKnow extends Component {
     constructor (props) {
         super(props);
 
-        this.state = {};
+        this.state = {
+            players: [],
+            goal: 500
+        };
     }
 
     getInitialRoute (state) {
-        return { component: GameSetup };
+        return {
+            component: GameSetup,
+            passProps: {
+                goal: this.state.goal
+            }
+        };
     }
 
     renderScene (route, navigator) {

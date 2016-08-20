@@ -21,10 +21,9 @@ export default class YouKnow extends Component {
         super(props);
 
         this.state = {
-            players: [this.newPlayer('Drew'), this.newPlayer('Suzy')],
+            players: [],
             goal: 500,
-            stage: Stage.WINNER,
-            winner: 1
+            stage: Stage.GAME_SETUP
         };
     }
 

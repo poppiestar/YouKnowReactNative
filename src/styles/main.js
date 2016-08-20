@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-start',
         backgroundColor: '#F5FCFF',
-        paddingTop: 60,
+        paddingTop: 50,
         paddingBottom: 20,
         paddingLeft: 20,
         paddingRight: 20
@@ -18,8 +18,15 @@ const styles = StyleSheet.create({
         fontSize: 20,
         marginBottom: 20
     },
+    subheading: {
+        fontSize: 15,
+        marginBottom: 10
+    },
     text: {
         color: '#333333',
+    },
+    component: {
+        marginBottom: 20
     },
 });
 

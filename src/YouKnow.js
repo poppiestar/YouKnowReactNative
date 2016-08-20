@@ -125,6 +125,7 @@ export default class YouKnow extends Component {
                 return <GameRound
                             continue={ this.moveToEnterScore.bind(this) }
                             players={ this.state.players }
+                            goal={ this.state.goal }
                             winner={ this.state.winner }
                             selectWinner={ this.selectWinner.bind(this) }
                         />;

@@ -37,6 +37,8 @@ export default class GameRound extends Component {
     render () {
         return (
             <View style={ styles.page }>
+                <Text style={ styles.heading }>Player Scores</Text>
+                <Text style={ styles.goal }>Goal for this game: { this.props.goal }</Text>
                 <GameRound.PlayerScores
                     players={ this.props.players }
                 />

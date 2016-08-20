@@ -51,7 +51,7 @@ export default class GameRound extends Component {
                     containerStyle={{padding: 10, height: 45, overflow: 'hidden', borderRadius: 4, backgroundColor: 'blue' }}
                     style={{fontSize: 20, color: 'white'}}
                     onPress={ this.validate.bind(this) }>
-                    Enter Score
+                    Round Over
                 </Button>
             </View>
         );

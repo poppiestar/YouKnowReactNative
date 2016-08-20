@@ -32,6 +32,10 @@ export default class YouKnow extends Component {
         this.setState({ stage: Stage.GAME_ROUND });
     }
 
+    moveToEnterScore () {
+        this.setState({ stage: Stage.ENTER_SCORE });
+    }
+
     newPlayer (name) {
         return {
             name: name,
@@ -51,22 +55,28 @@ export default class YouKnow extends Component {
         });
     }
 
+    selectWinner (id) {
+        this.setState({ winner: id });
+    }
+
     render() {
         switch (this.state.stage) {
             case Stage.GAME_SETUP:
                 return <GameSetup
-                            continue={this.moveToGameRound.bind(this)}
-                            addPlayer={this.addPlayer.bind(this)}
-                            removePlayer={this.removePlayer.bind(this)}
-                            players={this.state.players}
-                            goal={this.state.goal}
-                            updateGoal={this.updateGoal.bind(this)}
+                            continue={ this.moveToGameRound.bind(this) }
+                            addPlayer={ this.addPlayer.bind(this) }
+                            removePlayer={ this.removePlayer.bind(this) }
+                            players={ this.state.players }
+                            goal={ this.state.goal }
+                            updateGoal={ this.updateGoal.bind(this) }
                         />;
 
             case Stage.GAME_ROUND:
                 return <GameRound
-                            continue={this.moveToEnterScore}
-                            players={this.state.players}
+                            continue={ this.moveToEnterScore }
+                            players={ this.state.players }
+                            winner={ this.state.winner }
+                            selectWinner={ this.selectWinner.bind(this) }
                         />;
 
             // case Stage.ENTER_SCORE:

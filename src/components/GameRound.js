@@ -12,16 +12,19 @@ export default class GameRound extends Component {
     constructor (props) {
         super(props);
 
-        this.state = {};
+        this.state = {
+            winner: -1
+        };
     }
 
     validate () {
-        if (!this.state.winner) {
+        if (this.state.winner >= 0) {
+            this.props.selectWinner(this.state.winner);
+            this.props.continue();
+        } else {
             Alert.alert('Who won?', 'You need to select the winner of this round', [
                 { text: 'OK' }
             ]);
-        } else {
-            this.props.continue(parseInt(this.state.winner, 10));
         }
     }
 
@@ -35,11 +38,12 @@ export default class GameRound extends Component {
         return (
             <View style={ styles.page }>
                 <GameRound.PlayerScores
-                    players={this.props.players}
+                    players={ this.props.players }
                 />
                 <GameRound.WinnerSelector
-                    players={this.props.players}
-                    selectWinner={this.selectWinner.bind(this)}
+                    players={ this.props.players }
+                    selectWinner={ this.selectWinner.bind(this) }
+                    winner={ this.state.winner }
                 />
                 <Button
                     containerStyle={{padding: 10, height: 45, overflow: 'hidden', borderRadius: 4, backgroundColor: 'blue' }}

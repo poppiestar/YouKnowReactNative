@@ -31,6 +31,13 @@ export default class YouKnow extends Component {
         this.setStage(Stage.GAME_ROUND);
     }
 
+    newPlayer (name) {
+        return {
+            name: name,
+            scores: [0]
+        };
+    }
+
     addPlayer (name) {
         this.setState({ players: this.state.players.concat(this.newPlayer(name)) });
     }

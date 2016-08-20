@@ -8,18 +8,17 @@ const styles = StyleSheet.create({
         backgroundColor: '#F5FCFF',
         paddingTop: 50,
         paddingBottom: 20,
-        paddingLeft: 20,
-        paddingRight: 20
+        paddingHorizontal: 20,
     },
     action: {
         borderWidth: 1,
     },
     heading: {
-        fontSize: 20,
+        fontSize: 25,
         marginBottom: 20
     },
     subheading: {
-        fontSize: 15,
+        fontSize: 20,
         marginBottom: 10
     },
     text: {
@@ -30,7 +29,27 @@ const styles = StyleSheet.create({
     },
     scoreInput: {
         flex: 1,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    playerList: {
+        paddingHorizontal: 20
+    },
+    playerListItem: {
+        fontSize: 20,
+        marginBottom: 10
+    },
+    playerScore: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    playerScoreName: {
+        fontSize: 20
+    },
+    playerScoreValue: {
+        fontSize: 20
+    },
     buttonContainer: {
         padding: 10,
         height: 45,
@@ -42,6 +61,10 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: 'white'
     },
+    goal: {
+        alignSelf: 'center',
+        fontSize: 20,
+        marginBottom: 10
     }
 });
 

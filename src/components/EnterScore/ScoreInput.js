@@ -30,10 +30,20 @@ export default class ScoreInput extends Component {
     render () {
         return (
             <View style={ styles.scoreInput }>
-                <Text>{this.props.name}</Text>
-                <Button onPress={this.decrement.bind(this)}>-</Button>
-                <Text>{this.state.count}</Text>
-                <Button onPress={this.increment.bind(this)}>+</Button>
+                <Text style={ { flex: 2 } }>{this.props.name}</Text>
+                <View style={ { flex: 1, flexDirection: 'row', height: 25, justifyContent: 'space-between' } }>
+                    <Button
+                        style={ { fontSize: 30 }}
+                        onPress={this.decrement.bind(this)}>
+                        -
+                    </Button>
+                    <Text style={ { fontSize: 20 }}>{this.state.count}</Text>
+                    <Button
+                        style={ { fontSize: 30 }}
+                        onPress={this.increment.bind(this)}>
+                        +
+                    </Button>
+                </View>
             </View>
         );
     }

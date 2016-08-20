@@ -67,8 +67,8 @@ export default class EnterScore extends Component {
 
         return (
             <View style={ styles.page }>
-                <Text style={ styles.heading }>Enter Score</Text>
-                <Text>Winner: {this.props.players[this.props.winner].name}</Text>
+                <Text style={ {alignSelf: 'center', fontSize: 25, marginBottom: 15}}>{this.props.players[this.props.winner].name} won the round!</Text>
+                <Text style={ styles.subheading }>Enter Score</Text>
                 <Text>Value: {this.state.score}</Text>
                 {scoreInputs}
                 <Button

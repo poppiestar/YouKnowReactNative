@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { View, Alert } from 'react-native';
+import { View, Text, Alert } from 'react-native';
 import Button from 'react-native-button';
 
 import styles from '../styles/main';

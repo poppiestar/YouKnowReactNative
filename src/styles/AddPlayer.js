@@ -10,16 +10,13 @@ const styles = StyleSheet.create({
     input: {
         flex: 1,
         backgroundColor: 'white',
-        paddingTop: 10,
-        paddingBottom: 10,
-        paddingLeft: 20,
-        paddingRight: 20
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        fontSize: 20
     },
     button: {
-        paddingTop: 10,
-        paddingBottom: 10,
-        paddingLeft: 20,
-        paddingRight: 20
+        paddingVertical: 10,
+        paddingHorizontal: 20,
     }
 });
 

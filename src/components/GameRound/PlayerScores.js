@@ -10,13 +10,15 @@ export default class PlayerScores extends Component {
             const score = player.scores.reduce((prev, next) => { return prev + next });
 
             return (
-                <Text key={i}>{player.name}: {score}</Text>
+                <View key={i} style={ styles.playerScore }>
+                    <Text style={ styles.playerScoreName }>{player.name}</Text>
+                    <Text style={ styles.playerScoreValue }>{score}</Text>
+                </View>
             );
         });
 
         return (
             <View style={ styles.component }>
-                <Text style={ styles.heading }>Player Scores</Text>
                 {players}
             </View>
         );

@@ -2,9 +2,12 @@
 import React, { Component } from 'react';
 import { Navigator } from 'react-native';
 import NavigationBarRouteMapper from './NavigationBarRouteMapper';
+import update from 'react-addons-update';
 
 import GameSetup from './components/GameSetup';
 import GameRound from './components/GameRound';
+import EnterScore from './components/EnterScore';
+import Winner from './components/Winner';
 
 const Stage = {
     GAME_SETUP: 1,
@@ -18,9 +21,10 @@ export default class YouKnow extends Component {
         super(props);
 
         this.state = {
-            players: [],
+            players: [this.newPlayer('Drew'), this.newPlayer('Suzy')],
             goal: 500,
-            stage: Stage.GAME_SETUP
+            stage: Stage.WINNER,
+            winner: 1
         };
     }
 
@@ -34,6 +38,35 @@ export default class YouKnow extends Component {
 
     moveToEnterScore () {
         this.setState({ stage: Stage.ENTER_SCORE });
+    }
+
+    moveToNextRound (score) {
+        // add score to winner's score table
+        let players = update(this.state.players, {
+            [this.state.winner]: {
+                scores: { $push: [score] }
+            }
+        });
+
+        const winner = players[this.state.winner];
+
+        // calculate winner's total to see if they've beaten the goal
+        if (this.calculateTotal(winner.scores) >= this.state.goal) {
+            this.setState({
+                players: players,
+                stage: Stage.WINNER
+            });
+        } else {
+            this.setState({
+                players: players,
+                stage: Stage.GAME_ROUND,
+                winner: undefined
+            });
+        }
+    }
+
+    calculateTotal (scores) {
+        return scores.reduce( (prev, curr) => prev + curr );
     }
 
     newPlayer (name) {
@@ -59,6 +92,24 @@ export default class YouKnow extends Component {
         this.setState({ winner: id });
     }
 
+    restartGame () {
+        this.setState({
+            stage: Stage.GAME_ROUND,
+            goal: this.state.goal,
+            players: this.state.players.map( (player) => {
+                return this.newPlayer(player.name);
+            })
+        });
+    }
+
+    resetGame () {
+        this.setState({
+            players: [],
+            goal: 500,
+            stage: Stage.GAME_SETUP
+        });
+    }
+
     render() {
         switch (this.state.stage) {
             case Stage.GAME_SETUP:
@@ -73,17 +124,26 @@ export default class YouKnow extends Component {
 
             case Stage.GAME_ROUND:
                 return <GameRound
-                            continue={ this.moveToEnterScore }
+                            continue={ this.moveToEnterScore.bind(this) }
                             players={ this.state.players }
                             winner={ this.state.winner }
                             selectWinner={ this.selectWinner.bind(this) }
                         />;
 
-            // case Stage.ENTER_SCORE:
-            //     return <EnterScore continue={this.moveToNextRound} winner={this.state.players[this.state.winner].name} />;
-            //
-            // case Stage.WINNER:
-            //     return <Winner winner={this.state.players[this.state.winner]} restartGame={this.restartGame} resetGame={this.resetGame} />;
+            case Stage.ENTER_SCORE:
+                return <EnterScore
+                            continue={ this.moveToNextRound.bind(this) }
+                            players={ this.state.players }
+                            winner={ this.state.winner }
+                        />;
+
+            case Stage.WINNER:
+                return <Winner
+                            winner={ this.state.winner }
+                            players={ this.state.players }
+                            restartGame={ this.restartGame.bind(this) }
+                            resetGame={ this.resetGame.bind(this) }
+                        />;
 
             // default:
             //     return <Splash />;

@@ -28,6 +28,10 @@ const styles = StyleSheet.create({
     component: {
         marginBottom: 20
     },
+    scoreInput: {
+        flex: 1,
+        flexDirection: 'row'
+    }
 });
 
 export default styles;

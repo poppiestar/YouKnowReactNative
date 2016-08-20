@@ -3,8 +3,14 @@ import React, { Component } from 'react';
 import { Navigator } from 'react-native';
 import NavigationBarRouteMapper from './NavigationBarRouteMapper';
 
-import styles from './styles/main';
 import GameSetup from './components/GameSetup';
+
+const Stage = {
+    GAME_SETUP: 1,
+    GAME_ROUND: 2,
+    ENTER_SCORE: 3,
+    WINNER: 4
+};
 
 export default class YouKnow extends Component {
     constructor (props) {
@@ -12,34 +18,54 @@ export default class YouKnow extends Component {
 
         this.state = {
             players: [],
-            goal: 500
+            goal: 500,
+            stage: Stage.GAME_SETUP
         };
     }
 
-    getInitialRoute (state) {
-        return {
-            component: GameSetup,
-            passProps: {
-                goal: this.state.goal
-            }
-        };
+    updateGoal (goal) {
+        this.setState({ goal: goal });
     }
 
-    renderScene (route, navigator) {
-        return React.createElement(route.component, { ...this.props, ...route.passProps, route, navigator } );
+    moveToGameRound () {
+        this.setStage(Stage.GAME_ROUND);
+    }
+
+    addPlayer (name) {
+        this.setState({ players: this.state.players.concat(this.newPlayer(name)) });
+    }
+
+    removePlayer (player) {
+        this.setState({
+            players: this.state.players.filter((candidate) => {
+                return candidate.name !== player.name;
+            })
+        });
     }
 
     render() {
-        return (
-            <Navigator
-                initialRoute={ this.getInitialRoute(this.state) }
-                renderScene={ this.renderScene.bind(this) }
-                style={ styles.nav }
-                navigationBar={
-                    <Navigator.NavigationBar
-                        routeMapper={ NavigationBarRouteMapper } />
-                }
-            />
-        );
+        switch (this.state.stage) {
+            case Stage.GAME_SETUP:
+                return <GameSetup
+                            continue={this.moveToGameRound.bind(this)}
+                            addPlayer={this.addPlayer.bind(this)}
+                            removePlayer={this.removePlayer.bind(this)}
+                            players={this.state.players}
+                            goal={this.state.goal}
+                            updateGoal={this.updateGoal.bind(this)}
+                        />;
+
+            // case Stage.GAME_ROUND:
+            //     return <GameRound continue={this.moveToEnterScore} players={this.state.players} />;
+            //
+            // case Stage.ENTER_SCORE:
+            //     return <EnterScore continue={this.moveToNextRound} winner={this.state.players[this.state.winner].name} />;
+            //
+            // case Stage.WINNER:
+            //     return <Winner winner={this.state.players[this.state.winner]} restartGame={this.restartGame} resetGame={this.resetGame} />;
+
+            // default:
+            //     return <Splash />;
+        };
     }
 }

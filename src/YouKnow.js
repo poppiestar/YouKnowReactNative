@@ -4,6 +4,7 @@ import { Navigator } from 'react-native';
 import NavigationBarRouteMapper from './NavigationBarRouteMapper';
 
 import GameSetup from './components/GameSetup';
+import GameRound from './components/GameRound';
 
 const Stage = {
     GAME_SETUP: 1,
@@ -28,7 +29,7 @@ export default class YouKnow extends Component {
     }
 
     moveToGameRound () {
-        this.setStage(Stage.GAME_ROUND);
+        this.setState({ stage: Stage.GAME_ROUND });
     }
 
     newPlayer (name) {
@@ -62,9 +63,12 @@ export default class YouKnow extends Component {
                             updateGoal={this.updateGoal.bind(this)}
                         />;
 
-            // case Stage.GAME_ROUND:
-            //     return <GameRound continue={this.moveToEnterScore} players={this.state.players} />;
-            //
+            case Stage.GAME_ROUND:
+                return <GameRound
+                            continue={this.moveToEnterScore}
+                            players={this.state.players}
+                        />;
+
             // case Stage.ENTER_SCORE:
             //     return <EnterScore continue={this.moveToNextRound} winner={this.state.players[this.state.winner].name} />;
             //

@@ -30,8 +30,8 @@ export default class GameSetup extends Component {
                 <GameSetup.SetGoal goal={this.props.goal} updateGoal={this.props.updateGoal} />
                 <GameSetup.EnterPlayers addPlayer={this.props.addPlayer} removePlayer={this.props.removePlayer} players={this.props.players} />
                 <Button
-                    containerStyle={{padding: 10, height: 45, overflow: 'hidden', borderRadius: 4, backgroundColor: 'blue' }}
-                    style={{fontSize: 20, color: 'white'}}
+                    containerStyle={ styles.buttonContainer }
+                    style={ styles.buttonText }
                     onPress={ this.validateSetup.bind(this) }>
                     Start Game
                 </Button>

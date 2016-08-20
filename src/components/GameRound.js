@@ -48,8 +48,8 @@ export default class GameRound extends Component {
                     winner={ this.state.winner }
                 />
                 <Button
-                    containerStyle={{padding: 10, height: 45, overflow: 'hidden', borderRadius: 4, backgroundColor: 'blue' }}
-                    style={{fontSize: 20, color: 'white'}}
+                    containerStyle={ styles.buttonContainer }
+                    style={ styles.buttonText }
                     onPress={ this.validate.bind(this) }>
                     Round Over
                 </Button>

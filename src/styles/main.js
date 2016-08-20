@@ -31,6 +31,17 @@ const styles = StyleSheet.create({
     scoreInput: {
         flex: 1,
         flexDirection: 'row'
+    buttonContainer: {
+        padding: 10,
+        height: 45,
+        overflow: 'hidden',
+        borderRadius: 4,
+        backgroundColor: 'blue'
+    },
+    buttonText: {
+        fontSize: 20,
+        color: 'white'
+    },
     }
 });
 

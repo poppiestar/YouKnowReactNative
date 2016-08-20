@@ -72,8 +72,8 @@ export default class EnterScore extends Component {
                 <Text>Value: {this.state.score}</Text>
                 {scoreInputs}
                 <Button
-                    containerStyle={{padding: 10, height: 45, overflow: 'hidden', borderRadius: 4, backgroundColor: 'blue' }}
-                    style={{fontSize: 20, color: 'white'}}
+                    containerStyle={ styles.buttonContainer }
+                    style={ styles.buttonText }
                     onPress={ this.validate.bind(this) }>
                     Enter Score
                 </Button>

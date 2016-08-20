@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Alert } from 'react-native';
 import Button from 'react-native-button';
 
 import styles from '../styles/main';
@@ -14,8 +14,13 @@ export default class GameSetup extends Component {
     }
 
     validateSetup () {
-        console.log('validating setup');
-        return false;
+        if (this.props.players.length < 2) {
+            Alert.alert('You need more players', 'You need at least two players to play', [
+                { text: 'OK' }
+            ]);
+        } else {
+            this.props.continue();
+        }
     }
 
     render () {

@@ -1,11 +1,16 @@
 
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+import { View, Text } from 'react-native';
+
+import GoalSelect from './GoalSelect';
 
 export default class SetGoal extends Component {
     render () {
         return (
-            <Text>SetGoal component</Text>
+            <View>
+                <Text>Set Game Goal</Text>
+                <GoalSelect goal={this.props.goal} updateGoal={this.props.updateGoal} />
+            </View>
         );
     }
 }
